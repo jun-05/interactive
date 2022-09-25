@@ -1,8 +1,7 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Parallax from "./pages/Parallax";
 import ScrollFixed from "./pages/ScrollFixed";
-import { BrowserRouter } from "react-router-dom";
-import { Routes } from "react-router-dom";
-import { Route } from "react-router-dom";
 
 function App() {
   return (

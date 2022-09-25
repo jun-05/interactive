@@ -3,6 +3,7 @@ import { Section } from "./../components/scrollFixed/section";
 import cls from "classnames";
 
 export const ScrollFixed = () => {
+  const [page, setPage] = useState(0);
   const [activePage, setActivePage] = useState<number>(0);
 
   const liStyle = (active: boolean) =>
@@ -17,12 +18,11 @@ export const ScrollFixed = () => {
         document.documentElement.scrollTop / window.innerHeight
       );
       setActivePage(page);
-      console.log(page);
     });
     return () => {
       window.removeEventListener("scroll", () => {});
     };
-  }, [activePage]);
+  }, [page]);
 
   return (
     <div className="overflow-x-hidden bg-[#e8e19b]">
@@ -31,7 +31,7 @@ export const ScrollFixed = () => {
           <li
             className={liStyle(i === activePage)}
             onClick={() => {
-              setActivePage((prev) => (prev = i));
+              setPage((prev) => (prev = i));
               window.scrollTo({
                 top: window.innerHeight * i,
                 behavior: "smooth",
