@@ -14,13 +14,18 @@ export const ScrollFixed = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      let page = Math.round(
+      let movePage = Math.round(
         document.documentElement.scrollTop / window.innerHeight
       );
-      setActivePage(page);
+      setActivePage(movePage);
     });
     return () => {
-      window.removeEventListener("scroll", () => {});
+      window.removeEventListener("scroll", () => {
+        let movePage = Math.round(
+          document.documentElement.scrollTop / window.innerHeight
+        );
+        setActivePage(movePage);
+      });
     };
   }, [page]);
 
@@ -44,7 +49,7 @@ export const ScrollFixed = () => {
       <div className="relative h-screen w-screen">
         <h1
           className={cls(
-            "fixed text[#111]  text-6xl top-1/2  left-1/2 transform translate-x-[-50%]  translate-y-[-50%] transition duration-200 ease-in-out",
+            "fixed text[#111]  text-6xl top-1/2  left-1/2 transform translate-x-[-50%]  translate-y-[-50%] transition duration-200 ease-in-out -z-0",
             {
               hidden: activePage > 0,
             }
@@ -61,7 +66,7 @@ export const ScrollFixed = () => {
       />
       <Section
         pageName={"page 2"}
-        content={"선을 정리한다 한다"}
+        content={"선을 정리한다"}
         imgName={"pic_2.jpg"}
         active={activePage > 1}
       />
