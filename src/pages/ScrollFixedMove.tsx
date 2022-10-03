@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import cls from "classnames";
 import Section from "../components/scorllFixedMove/section";
 
 export const ScrollFixedMove = () => {
-  const [page, setPage] = useState(0);
-  const [activePage, setActivePage] = useState<number>(0);
+  const [activePage, setActivePage] = useState(0);
+  const [opacity, setOpacity] = useState(1);
+  let page = useRef<number>(0).current;
+  const pageChange = (pageNum: number) => (page = pageNum);
+
+  const marginTop = 48;
 
   const liStyle = (active: boolean) =>
     cls(
@@ -12,16 +16,58 @@ export const ScrollFixedMove = () => {
       { "bg-[#000]": active }
     );
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (page < 1) {
+        let pageOneOpacity = parseFloat(
+          (
+            document.documentElement.scrollTop /
+            (window.innerHeight + marginTop * page)
+          ).toFixed(1)
+        );
+        setOpacity(1 - pageOneOpacity * 2);
+        console.log("0일때만 실행");
+      }
+
+      let movePage = Math.round(
+        document.documentElement.scrollTop /
+          (window.innerHeight + marginTop * page)
+      );
+      pageChange(movePage);
+      setActivePage(movePage);
+    });
+    return () => {
+      window.removeEventListener("scroll", () => {
+        if (page < 1) {
+          let pageOneOpacity = parseFloat(
+            (
+              document.documentElement.scrollTop /
+              (window.innerHeight + marginTop * page)
+            ).toFixed(1)
+          );
+          console.log("page");
+          setOpacity(1 - pageOneOpacity * 2);
+        }
+        let movePage = Math.round(
+          document.documentElement.scrollTop /
+            (window.innerHeight + marginTop * page)
+        );
+        pageChange(movePage);
+        setActivePage(movePage);
+      });
+    };
+  }, [page, pageChange]);
+
   return (
     <div className="overflow-x-hidden min-w-[480px]">
       <ul className="fixed right-[3vw] top-[40%] z-[100]">
-        {Array.from({ length: 7 }, (v, i) => (
+        {Array.from({ length: 4 }, (v, i) => (
           <li
             className={liStyle(i === activePage)}
             onClick={() => {
-              setPage((prev) => (prev = i));
+              pageChange(i);
               window.scrollTo({
-                top: window.innerHeight * i,
+                top: window.innerHeight * i + marginTop * i,
                 behavior: "smooth",
               });
             }}
@@ -31,8 +77,8 @@ export const ScrollFixedMove = () => {
       </ul>
       <div className="relative h-screen w-screen">
         <h1
-          className="fixed text[#00] text-6xl top-1/2  left-1/2 transform translate-x-[-50%] translate-y-[-50%]"
-          style={{ opacity: 1 }}
+          className="fixed transition ease-out text[#00] text-6xl top-1/2  left-1/2 transform translate-x-[-50%] translate-y-[-50%]"
+          style={{ opacity: opacity }}
         >
           NIKE 스니커즈
         </h1>
@@ -45,7 +91,7 @@ export const ScrollFixedMove = () => {
         img_name_1={"nike_1_1.JPG"}
         img_name_2={"nike_1_2.JPG"}
         img_alt={"블레이저 미드"}
-        active={page === 1}
+        active={activePage === 1}
       />
       <Section
         title={"에어맥스 95"}
@@ -55,7 +101,7 @@ export const ScrollFixedMove = () => {
         img_name_1={"nike_2_1.JPG"}
         img_name_2={"nike_2_2.JPG"}
         img_alt={"블레이저 미드"}
-        active={page === 2}
+        active={activePage === 2}
       />
       <Section
         title={"리액트 비전 3M"}
@@ -65,7 +111,7 @@ export const ScrollFixedMove = () => {
         img_name_1={"nike_3_1.JPG"}
         img_name_2={"nike_3_2.JPG"}
         img_alt={"블레이저 미드"}
-        active={page === 3}
+        active={activePage === 3}
       />
     </div>
   );
