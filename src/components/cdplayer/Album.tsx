@@ -13,11 +13,10 @@ export const Album = ({ imgName, acitve = false }: alubmProps) => {
   const diskSize = "lg:w-[392px] lg:h-[392px] w-[244px] h-[244px]";
   const diskInnerSize = "lg:w-[160px] lg:h-[160px] w-[100px] h-[100px]";
 
-  if (!acitve) return null;
-
   return (
     <div
       className={`${albumSize} absolute left-[50%] -translate-x-1/2 -translate-y-1/2  transition-all duration-1000 ease-in-out`}
+      style={!acitve ? { display: "none" } : {}}
     >
       <div
         className={`${diskSize} absolute top-1 left-[30%]  rounded-full shadow-2xl bg-gradient-to-br from-black via-[#333333] to-black   animate-spin-slow hover:left-[40%] `}
@@ -33,4 +32,4 @@ export const Album = ({ imgName, acitve = false }: alubmProps) => {
   );
 };
 
-export default Album;
+export default React.memo(Album);
