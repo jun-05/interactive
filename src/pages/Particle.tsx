@@ -105,7 +105,7 @@ const Particle = () => {
         numberBoxTarget.forEach((v, i) => {
           const numberBox = `.numberBox :nth-child(${i + 1})`;
           gsap.to(numberBox, {
-            top: windowWidth / 2 + Math.sin(i / 3) * 80,
+            top: windowHeight / 2 + Math.sin(i / 3) * 80,
             left: (i * windowWidth) / 105,
             autoAlpha: "random(0,1)",
             scale: 0.5,
