@@ -1,12 +1,17 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import cls from "classnames";
 import Section from "../components/scorllFixedMove/section";
 
 export const ScrollFixedMove = () => {
   const [activePage, setActivePage] = useState(0);
   const [opacity, setOpacity] = useState(1);
-  let page = useRef<number>(0).current;
-  const pageChange = (pageNum: number) => (page = pageNum);
+  let page = useRef<Number>(0).current;
+  const pageChange = useCallback(
+    (pageNum: Number) => {
+      page = pageNum;
+    },
+    [page]
+  );
 
   const marginTop = 48;
 
