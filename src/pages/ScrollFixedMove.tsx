@@ -5,9 +5,9 @@ import Section from "../components/scorllFixedMove/section";
 export const ScrollFixedMove = () => {
   const [activePage, setActivePage] = useState(0);
   const [opacity, setOpacity] = useState(1);
-  let page = useRef<Number>(0).current;
+  let page = useRef<number>(0).current;
   const pageChange = useCallback(
-    (pageNum: Number) => {
+    (pageNum: number) => {
       page = pageNum;
     },
     [page]
