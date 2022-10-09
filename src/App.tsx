@@ -10,6 +10,7 @@ function App() {
     <ColorProvider>
       <BrowserRouter>
         <Routes>
+        <Route path="/ScrollFixed" element={<ScrollFixed />} />
           <Route path="/ScrollFixed" element={<ScrollFixed />} />
           <Route path="/Parallax" element={<Parallax />} />
           <Route path="/cdPlyaer" element={<CdPlayer />} />
