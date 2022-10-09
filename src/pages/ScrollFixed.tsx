@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Section } from "./../components/scrollFixed/section";
 import cls from "classnames";
+import Section from "../components/scrollFixed/Section";
 
 export const ScrollFixed = () => {
   const [activePage, setActivePage] = useState<number>(0);
