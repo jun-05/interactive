@@ -22,8 +22,8 @@ const Particle = () => {
           delay: i * 0.2,
           duration: 1,
         });
-      }, titleBoxRef);
-    });
+      });
+    }, titleBoxRef);
 
     return () => {
       ctx.revert();
@@ -40,8 +40,8 @@ const Particle = () => {
           ease: Power3.easeInOut,
           delay: i * 0.1 + 1,
         });
-      }, ButtonBoxRef);
-    });
+      });
+    }, ButtonBoxRef);
     return () => {
       ctx.revert();
     };
@@ -69,7 +69,6 @@ const Particle = () => {
 
   useLayoutEffect(() => {
     const numberBoxTarget = NumberBoxRef.current?.childNodes!;
-    gsap.killTweensOf(numberBoxTarget);
     let ctx = gsap.context(() => {
       if (page === 1) {
         numberBoxTarget.forEach((v, i) => {
@@ -114,7 +113,7 @@ const Particle = () => {
           });
         });
       }
-    });
+    }, NumberBoxRef);
     return () => {
       ctx.revert();
     };
