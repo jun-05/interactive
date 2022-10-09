@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Parallax } from "./pages/Parallax";
-import ScrollFixed from "./pages/ScrollFixed";
+import { ScrollFixed } from "./pages/ScrollFixed";
 import { CdPlayer } from "./pages/CdPlayer";
 import { ColorProvider } from "./context/color";
 import Particle from "./pages/Particle";
